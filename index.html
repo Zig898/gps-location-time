@@ -22,7 +22,7 @@
     function updateDisplay(offsetHours) {
       const now = new Date();
       const utcMillis = now.getTime() + (now.getTimezoneOffset()*60*1000);
-      const adjusted = new Date(utcMillis - offsetHours * 60 * 60 * 1000);
+      const adjusted = new Date(utcMillis - (offsetHours * 60 * 60 * 1000));
       const h = pad(adjusted.getUTCHours());
       const m = pad(adjusted.getUTCMinutes());
       const s = pad(adjusted.getUTCSeconds());
