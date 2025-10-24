@@ -5,4 +5,4 @@ function updateGMTTime() {
     }
 // Update immediately and then every second
 updateGMTTime();
-setInterval(updateGMTTime, 1000);
+setInterval(updateGMTTime, 1);
