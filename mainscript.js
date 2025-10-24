@@ -8,6 +8,16 @@ function pad(num) {
       const mins = pad(now.getUTCMinutes());
       const secs = pad(now.getUTCSeconds());
       document.getElementById('time').textContent = `${hrs}:${mins}:${secs} (UTC)`;
+      // get location
+      navigator.geolocation.getCurrentPosition(
+  pos => {
+    const {latitude, longitude} = pos.coords;
+    document.getElementById('location').textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
+  },
+  err => {
+    console.error('Error getting location:', err);
+  }
+);
     }
 
     updateGMTTime();
