@@ -1,10 +1,14 @@
-function updateGMTTime() {
-      const now = new Date();
-      const gmtHrs = now.getUTCHours();  // gives a string like: "Tue, 25 Jul 2023 17:21:46 GMT"
-      const gmtMins = now.getUTCMinutes();
-      document.getElementById('time').textContent = gmtMins;
-      // document.getElementById('time').textContent = gmtMins;
+function pad(num) {
+      return num.toString().padStart(2, '0');
     }
-// Update immediately and then every second
-updateGMTTime();
-setInterval(updateGMTTime, 1);
+
+    function updateGMTTime() {
+      const now = new Date();
+      const hrs = pad(now.getUTCHours());
+      const mins = pad(now.getUTCMinutes());
+      const secs = pad(now.getUTCSeconds());
+      document.getElementById('time').textContent = `${hrs}:${mins}:${secs} (UTC)`;
+    }
+
+    updateGMTTime();
+    setInterval(updateGMTTime, 1000);  // every second
