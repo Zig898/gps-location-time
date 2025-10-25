@@ -1,21 +1,26 @@
-function pad(n){ return n.toString().padStart(2,'0'); }
+function pad(n){ return String(n).padStart(2,'0'); }
 
-    function updateDisplay(offsetHours){
-      const now = new Date();
-      const utcMillis = now.getTime(); // already UTC ms
-      const adjusted = new Date(utcMillis + offsetHours * 3600_000);
-      const h = pad(adjusted.getUTCHours());
-      const m = pad(adjusted.getUTCMinutes());
-      const s = pad(adjusted.getUTCSeconds());
-      const month = pad(adjusted.getUTCMonth() + 1);
-      const d = pad(adjusted.getUTCDate());
-      const y = adjusted.getUTCFullYear()
-      const sign = offsetHours >= 0 ? '+' : '';
-      document.getElementById('time').textContent =
-        `UTC${sign}${offsetHours.toFixed(2)} → ${h}:${m}:${s}`;
-      document.getElementById('date').textContent =
-        `${month}/${d}/${y}`;
-    }
+function updateDisplay(offsetHours){
+  // use a single UTC timestamp (ms since epoch) and add the offset
+  const utcMs = Date.now(); // already UTC-based ms
+  const adjusted = new Date(utcMs + offsetHours * 3600_000);
+
+  // date components (month is 0..11 so +1)
+  const y = adjusted.getUTCFullYear();
+  const month = pad(adjusted.getUTCMonth() + 1); // <-- correct: +1
+  const d = pad(adjusted.getUTCDate());
+
+  // time components
+  const h = pad(adjusted.getUTCHours());
+  const m = pad(adjusted.getUTCMinutes());
+  const s = pad(adjusted.getUTCSeconds());
+
+  const sign = offsetHours >= 0 ? '+' : '';
+  document.getElementById('time').textContent =
+    `UTC${sign}${offsetHours.toFixed(2)} → ${h}:${m}:${s}`;
+  document.getElementById('date').textContent =
+    `${month}/${d}/${y}`;
+}
 
     function startClock(offsetHours){
       updateDisplay(offsetHours);
