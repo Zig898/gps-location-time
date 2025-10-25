@@ -7,13 +7,14 @@
     body { font-family: sans-serif; text-align: center; margin-top: 50px; }
     #time { font-size: 2em; }
     #status { margin-top: 20px; color: gray; }
+    #date { font-size: 1.5em; }
   </style>
   <link rel="icon" href="favicon.png" type="image/png">
 </head>
 <body>
   <div id="time">Loading time…</div>
+  <div id="date">Loading date…</div>
   <div id="status">Getting location …</div>
-
   <script>
     function pad(n){ return n.toString().padStart(2,'0'); }
 
@@ -24,9 +25,14 @@
       const h = pad(adjusted.getUTCHours());
       const m = pad(adjusted.getUTCMinutes());
       const s = pad(adjusted.getUTCSeconds());
+      const month = pad(adjusted.getUTCMonth());
+      const d = pad(adjusted.getUTCDate());
+      const y = adjusted.getUTCFullYear()
       const sign = offsetHours >= 0 ? '+' : '';
       document.getElementById('time').textContent =
         `UTC${sign}${offsetHours.toFixed(2)} → ${h}:${m}:${s}`;
+      document.getElementById('date').textContent =
+        `${month}/${d}/${y}`;
     }
 
     function startClock(offsetHours){
