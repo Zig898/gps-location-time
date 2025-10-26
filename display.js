@@ -1,5 +1,5 @@
 function pad(n){ return String(n).padStart(2,'0'); }
-
+const first = Date.now();
 function updateDisplay(offsetHours){
   // use a single UTC timestamp (ms since epoch) and add the offset
   const utcMs = Date.now(); // already UTC-based ms
@@ -19,7 +19,7 @@ function updateDisplay(offsetHours){
   document.getElementById('time').textContent =
     `UTC${sign}${offsetHours.toFixed(2)} → ${h}:${m}:${s}`;
   document.getElementById('date').textContent =
-    `${month}/${d}/${y}`;
+    first - utcMs;
 }
 
     function startClock(offsetHours){
